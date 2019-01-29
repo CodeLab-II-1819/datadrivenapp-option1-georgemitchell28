@@ -7,27 +7,27 @@ using namespace std;
 
 void numberoftweets() {
 
-	int tweetnumber = 0; // the initial tweet number is set to 0 //
-	string line;
+		int tweetnumber = 0; // the initial tweet number is set to 0 //
+		string line;
 
-	ifstream tweets("sampleTweets.csv"); //this opens the folder containing tweets //
+			ifstream tweets("sampleTweets.csv"); //this opens the folder containing tweets //
 
-	if (tweets.is_open()) // if the folder is open than this if statement will take effect //
-	{
+			if (tweets.is_open()) // if the folder is open than this if statement will take effect //
+					{
 
-		while (!tweets.eof()) {  // whilst tweets is not at the end of the file //
-			getline(tweets, line); // the program then gets the next line //
-			cout << line << endl;
-			tweetnumber++; // adds 1 to the counter //
-		}
-
-
-		cout << endl; // I decided to add two lines just to seperate the message from the tweets //
-		cout << endl;
-		cout << "there are " << tweetnumber << " tweets in this file" << endl; // outputs the amount of lines = tweets //
+						while (!tweets.eof()) {  // whilst tweets is not at the end of the file //
+						getline(tweets, line); // the program then gets the next line //
+						cout << line << endl;
+						tweetnumber++; // adds 1 to the counter //
+						}
 
 
-		tweets.close(); // this then closes the tweet file //
+			cout << endl; // I decided to add two lines just to seperate the message from the tweets //
+			cout << endl;
+			cout << "there are " << tweetnumber << " tweets in this file" << endl; // outputs the amount of lines = tweets //
+
+
+			tweets.close(); // this then closes the tweet file //
 
 	}
 
@@ -43,51 +43,50 @@ void counttweetsword(string searchWord) {
 
 
 
-	int number = 0;   // the number of tweets with the word money are set at 0 //
-	string line;
+		int number = 0;   // the number of tweets with the word money are set at 0 //
+		string line;
 	
-	string lowercase;
-	string uppercase;
+		string lowercase;
+		string uppercase;
 
-	if (searchWord == "money")
-	{
-		lowercase = "money";
-		uppercase = "Money";
-	}
+			if (searchWord == "money")
+					{
+					lowercase = "money";
+					uppercase = "Money";
+					}
 
-	else {
-		lowercase = "politics";
-		uppercase = "Politics";
-	}
+			else	{
+					lowercase = "politics";
+					uppercase = "Politics";
+				    }
 	
 	
 
-	ifstream tweets("sampleTweets.csv");
+			ifstream tweets("sampleTweets.csv");
 
-	if (tweets.is_open()) // the folder containing the tweets is then opened //
+			if (tweets.is_open()) // the folder containing the tweets is then opened //
+				{
 
-	{
-		while (!tweets.eof()) { // whilst tweets is not at the end of the file //
-			getline(tweets, line); // the program checks the next line in the file//
-
-			if (line.find(lowercase) != string::npos)  // if the program finds a line containing the word "politics" it will add 1 //
-			{
+						while (!tweets.eof()) { // whilst tweets is not at the end of the file //
+						getline(tweets, line); // the program checks the next line in the file//
+						if (line.find(lowercase) != string::npos)  // if the program finds a line containing the word "politics" it will add 1 //
+						{
 
 				number++;
 
 				cout << line << endl;
 
-			}
+				}
 
-			if (line.find(uppercase) != string::npos) //I wanted the program to also check for uppercase versions of money so simply copied and changed it to uppercase //
+						if (line.find(uppercase) != string::npos) //I wanted the program to also check for uppercase versions of money so simply copied and changed it to uppercase //
 
-			{
+				{
 
 				number++;
 
 				cout << line << endl;
 
-			}
+				}
 
 		}
 		cout << endl;
@@ -348,8 +347,12 @@ void twentycharacters() {
 
 		tweets.close(); // the file then closes //
 	}
-}
+	else {
 
+		cout << "error reading file" << endl; // this error message appears If the file can't be read, to simply test this I just changed the name of the file //
+	}
+
+}
 
 
 
@@ -358,8 +361,9 @@ int main() {
 
 	int userInput;
 	char again;
-
-	do {
+	
+	
+	do { // entire code is wrapped around a do-while loop so the user can call multiple functions without having to restart the application //
 
 		cout << "What would you like to do with this large file of tweets?" << endl;
 		cout << "1. Count total number of Tweets" << endl;
@@ -377,6 +381,8 @@ int main() {
 
 
 		cin >> userInput;
+
+		
 		// this switch statement controls the users input when deciding which out of the 10 tests they want to carry out, each input is a different function//
 		switch (userInput) {
 
@@ -420,17 +426,33 @@ int main() {
 			twentycharacters();
 			break;
 
+
+
 		}
 
-		cout << "would you like to input another querie? type y or n" << endl;
+		
+		if (!(userInput == 1 || userInput == 2 || userInput == 3 || userInput == 4 || userInput == 5 || userInput == 6 || userInput == 7 || userInput == 8 || userInput == 9 || userInput == 10)) {
+
+			cout << "Invalid input try again" << endl;
+		}
+
+
+		cout << "would you like to input another query? type y or n" << endl;
 		cin >> again;
 
+		
 
-		}
-		while (again == 'y');
-		if (again == 'n')
+	if (again == 'n')
+		cout << "thankyou for using TweetFinder" << endl;
 
-			cout << "thankyou for using TweetFinder" << endl;
+	} while (again == 'y');
+
+	
+	
+
+	
+
+	
 	
 	system("pause"); // system pause makes sure the console doesn't automatically close upon completing a task so that the user can view the results //
 	return 0;
