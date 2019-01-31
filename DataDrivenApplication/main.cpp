@@ -356,6 +356,49 @@ void twentycharacters() {
 
 
 
+void userSearch() {
+
+	int number = 0;
+	string userOption;
+	string line;
+
+	cout << "Type in a word to search for in this tweet file" << endl;
+
+	ifstream tweets("sampleTweets.csv");
+
+	cin >> userOption;
+
+
+	if (tweets.is_open()) {
+
+
+		while (!tweets.eof()) {
+			getline(tweets, line);
+			if (line.find(userOption) != string::npos)
+			{
+
+				number++;
+
+				cout << line << endl;
+			}
+
+
+		}
+
+		cout << endl;
+		cout << endl;
+		cout << "Here are the tweets including the word " << userOption << endl;
+
+	}
+
+
+
+	else {
+
+		cout << "error reading file" << endl;
+
+	}
+}
 
 int main() {
 
@@ -376,7 +419,7 @@ int main() {
 		cout << "8. Print to the screen any tweets posted between the hours of midnight and 1am" << endl;
 		cout << "9. Print to the screen any tweets mentioning the word Santa on Christmas Day" << endl;
 		cout << "10. Print to the screen tweets that are exactly 20 characters in length" << endl;
-
+		cout << "11. Input your own word to search the file for any results" << endl;
 
 
 
@@ -426,12 +469,13 @@ int main() {
 			twentycharacters();
 			break;
 
-
+		case 11:
+			userSearch();
 
 		}
 
 		
-		if (!(userInput == 1 || userInput == 2 || userInput == 3 || userInput == 4 || userInput == 5 || userInput == 6 || userInput == 7 || userInput == 8 || userInput == 9 || userInput == 10)) {
+		if (!(userInput == 1 || userInput == 2 || userInput == 3 || userInput == 4 || userInput == 5 || userInput == 6 || userInput == 7 || userInput == 8 || userInput == 9 || userInput == 10 || userInput == 11)) {
 
 			cout << "Invalid input try again" << endl;
 		}
